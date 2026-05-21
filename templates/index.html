@@ -4,16 +4,69 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        h6 {
+            font-size: 15px
+        }
+
         .h2-text {
             color: red
         }
+
+        .h6-text {
+            color: yellow
+        }
+
+        #h1-text {
+            font-size: 50px
+        }
+
+        div.python > a {
+            color: green
+        }
+
+        ul li {
+            color: green
+        }
+
+        input[type="text"] {
+            background-color: blue
+        }
+
+        input[type="text"]:hover {
+            background-color: green
+        }
+
+        a:hover {
+            color: red
+        }
+
+        li::marker {
+            color: red
+        }
+
+        ul > li:nth-child(2) {
+            color: aqua
+        }
+
+        ul > li:nth-child(odd) {
+            color: blueviolet
+        }
+
+        ol > li:nth-child(even) {
+            color: blueviolet
+        }
+
+        div.nth > p:nth-of-type(3):hover {
+            color: darkmagenta
+        }
+
     </style>
 </head>
 <body>
-<div>
+<div class = "python">
     <h1 id="h1-text">Text</h1>
     <h2 class="h2-text">Text2</h2>
-    <h6 class="h2-text">Text6</h6>
+    <h6 class="h2-text h6-text">Text6</h6>
     <p>Если строка текста вылезла за пределы ширины экрана, в пайчарме <span style="color: green">-это вертикальная линяя справа,</span>
         то можно нажать
         OPTION + COMMAND + L и всё выравнивается автоматически</p>
@@ -32,7 +85,6 @@
 
     <form action="/action" method="POST">
         <input type="text" value="12345" placeholder="Text">
-        <input type="text" value="" placeholder="Text">
         <input required type="email" value="" placeholder="Email">
         <textarea required placeholder="Text">12345</textarea>
         <input type="password" value="" placeholder="Password">
@@ -59,8 +111,18 @@
         <tr>
         </tbody>
     </table>
+    <div class="nth">
+        <p>1</p>
+        <p>2</p>
+        <h6>3</h6>
+        <h5>4</h5>
+        <p>НАВЕДИ ХОВЕР</p>
+    </div>
 
-
+</div>
+<div class="java">
+    <h2 class="h2-text">Text2</h2>
+    <a href="https://www.python.org/" target="_blank">Java</a>
 </div>
 </body>
 </html>
