@@ -20,7 +20,8 @@ with sync_playwright() as playwright:
     button_registration = page.get_by_test_id('registration-page-registration-button')
     button_registration.click()
 
-    # page.wait_for_timeout(2000)
+    # поставил ожидание, т.к. регистрация у меня иногда не успева завершиться до сохранения storage_state
+    page.wait_for_timeout(2000)
 
     context.storage_state(path='registration-form.json')
 
