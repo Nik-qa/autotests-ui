@@ -1,5 +1,3 @@
-from lib2to3.pgen2.pgen import PgenGrammar
-
 import pytest
 from playwright.sync_api import Page, Playwright
 
