@@ -29,11 +29,19 @@ def initialize_browser_state(playwright: Playwright): #почитал про а�
     page.wait_for_timeout(2000)
 
     context.storage_state(path="browser-state.json")
+    browser.close()
 
 @pytest.fixture(scope="function")
 def chromium_page_with_state(initialize_browser_state, playwright: Playwright) -> Page:
     browser = playwright.chromium.launch(headless=True)
     context = browser.new_context(storage_state='browser-state.json')
-    page = context.new_page()
-    page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses')
-    yield page
+    yield context.new_page()
+    browser.close()
+
+@pytest.fixture(scope="function")
+def logit_test_custom(playwright: Playwright) -> Page:
+        browser = playwright.chromium.launch(headless=False)
+        context = browser.new_context()
+        page = context.new_page()
+        page.goto("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration")
+        yield page
