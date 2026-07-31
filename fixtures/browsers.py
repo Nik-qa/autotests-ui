@@ -40,8 +40,8 @@ def chromium_page_with_state(initialize_browser_state, playwright: Playwright) -
 
 @pytest.fixture(scope="function")
 def logit_test_custom(playwright: Playwright) -> Page:
-        browser = playwright.chromium.launch(headless=False)
-        context = browser.new_context()
-        page = context.new_page()
-        page.goto("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration")
-        yield page
+    browser = playwright.chromium.launch(headless=False)
+    context = browser.new_context()
+    page = context.new_page()
+    yield page
+    browser.close()

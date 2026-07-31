@@ -18,4 +18,4 @@ class TestReruns:
 
 @pytest.mark.flaky(reruns=3, reruns_delay =2, condition=PLATFORM == 'macOS')
 def test_reruns_condition():
-    assert random.choice([True, False])
+    assert False
