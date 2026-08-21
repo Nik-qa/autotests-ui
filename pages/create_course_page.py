@@ -46,7 +46,7 @@ class CreateCoursePage(BasePage):
         self.create_course_min_score_input = page.get_by_test_id('create-course-form-min-score-input').locator('input')
 
         # Заголовок и кнопка создания задания
-        self.exercises_title = page.get_by_test_id("create-course-form-min-score-input")
+        self.exercises_title = page.get_by_test_id("create-course-exercises-box-toolbar-title-text")
         self.create_exercise_button = page.get_by_test_id("create-course-exercises-box-toolbar-create-exercise-button")
 
         # Блок, который отображется, когда в курсе нет заданий
@@ -56,7 +56,7 @@ class CreateCoursePage(BasePage):
             "create-course-exercises-empty-view-description-text"
         )
 
-    def check_visible_course_title(self):
+    def check_visible_create_course_title(self):
         expect(self.create_course_title).to_be_visible()
         expect(self.create_course_title).to_have_text("Create course")
 
@@ -69,7 +69,7 @@ class CreateCoursePage(BasePage):
     def check_disabled_create_course_button(self):
         expect(self.create_course_button).to_be_disabled()
 
-    def check_visible_image_preview_empty_state(self):
+    def check_visible_image_preview_empty_view(self):
         expect(self.preview_empty_view_icon).to_be_visible()
 
         expect(self.preview_empty_view_title).to_be_visible()
@@ -104,7 +104,7 @@ class CreateCoursePage(BasePage):
     def check_visible_preview_image(self):
         expect(self.preview_image).to_be_visible()
 
-    def preview_upload_image(self, file: str):
+    def upload_preview_image(self, file: str):
         self.preview_image_upload_input.set_input_files(file)
 
     def check_visible_create_course_form(
@@ -116,7 +116,7 @@ class CreateCoursePage(BasePage):
             min_score: str
     ):
         expect(self.create_course_title_input).to_be_visible()
-        expect(self.create_course_title_input).to_have_text(title)
+        expect(self.create_course_title_input).to_have_value(title)
 
         expect(self.create_course_estimated_time_input).to_be_visible()
         expect(self.create_course_estimated_time_input).to_have_value(estimated_time)
@@ -139,7 +139,7 @@ class CreateCoursePage(BasePage):
             min_score: str
     ):
         self.create_course_title_input.fill(title)
-        expect(self.create_course_title_input).to_have_text(title)
+        expect(self.create_course_title_input).to_have_value(title)
 
         self.create_course_estimated_time_input.fill(estimated_time)
         expect(self.create_course_estimated_time_input).to_have_value(estimated_time)
@@ -151,7 +151,7 @@ class CreateCoursePage(BasePage):
         expect(self.create_course_max_score_input).to_have_value(max_score)
 
         self.create_course_min_score_input.fill(min_score)
-        expect(self.create_course_max_score_input).to_have_value(min_score)
+        expect(self.create_course_min_score_input).to_have_value(min_score)
 
     def check_visible_exercises_title(self):
         expect(self.exercises_title).to_be_visible()

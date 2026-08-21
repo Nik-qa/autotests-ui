@@ -3,7 +3,7 @@ from playwright.sync_api import Page, Playwright
 
 @pytest.fixture
 def chromium_page(playwright: Playwright) -> Page:
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch(headless=True)
     yield browser.new_page()
     browser.close()
 
@@ -40,7 +40,7 @@ def chromium_page_with_state(initialize_browser_state, playwright: Playwright) -
 
 @pytest.fixture(scope="function")
 def logit_test_custom(playwright: Playwright) -> Page:
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
     page = context.new_page()
     yield page
