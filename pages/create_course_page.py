@@ -1,10 +1,13 @@
 from playwright.sync_api import Page, expect
 from pages.base_page import BasePage
+from components.navigation.navbar_component import NavBarComponent
 
 
 class CreateCoursePage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
+
+        self.navbar = NavBarComponent(page)
 
         # Заголовок и кнопка создания курса
         self.create_course_title = page.get_by_test_id("create-course-toolbar-title-text")
@@ -202,7 +205,7 @@ class CreateCoursePage(BasePage):
         expect(exercise_description_input).to_be_visible()
         expect(exercise_description_input).to_be_value(description)
 
-    def fill_create_exercise_form(self, index: int, text:str, description: str):
+    def fill_create_exercise_form(self, index: int, text: str, description: str):
         exercise_title_input = self.page.get_by_test_id(
             f"create-course-exercise-form-description-{index}-input").locator(
             "input")
