@@ -1,10 +1,17 @@
 from playwright.sync_api import Page, expect
+
+from components.navigation.navbar_component import NavbarComponent
+from components.navigation.sidebar_component import SidebarComponent
 from pages.base_page import BasePage
+
 
 
 class CoursesListPage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
+
+        self.sidebar = SidebarComponent(page)
+        self.navbar = NavbarComponent(page)
 
         self.courses_title = page.get_by_test_id("courses-list-toolbar-title-text")
         self.create_course_button = page.get_by_test_id("courses-list-toolbar-create-course-button")
@@ -31,10 +38,10 @@ class CoursesListPage(BasePage):
         expect(self.empty_view_icon).to_be_visible()
 
         expect(self.empty_view_title).to_be_visible()
-        expect(self.empty_view_text).to_have_text('There is no results')
+        expect(self.empty_view_title).to_have_text('There is no results')
 
         expect(self.empty_view_text).to_be_visible()
-        expect(self.empty_view_title).to_have_text(
+        expect(self.empty_view_text).to_have_text(
             "Results from the load test pipeline will be displayed here"
         )
 
