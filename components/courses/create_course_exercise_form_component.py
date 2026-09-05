@@ -1,17 +1,18 @@
 from components.base_component import BaseComponent
 from playwright.sync_api import Page, expect
 
+
 class CreateCourseExerciseFormComponent(BaseComponent):
     def click_delete_button(self, index: int):
-        delete_button = self.page.get_by_test_id(
-            f"create-course-exercise-{index}-box-toolbar-delete-exercise-button"
-        )
+        delete_button = self.page.get_by_test_id(f"create-course-exercise-{index}-box-toolbar-delete-exercise-button")
         delete_button.click()
 
     def check_visible(self, index: int, text: str, description: str):
         subtitle = self.page.get_by_test_id(f"create-course-exercise-{index}-box-toolbar-subtitle-text")
-        title_input = self.page.get_by_test_id(f"create-course-exercise-form-title-{index}-input")
-        description_input = self.page.get_by_test_id(f"create-course-exercise-form-description-{index}-input")
+        title_input = self.page.get_by_test_id(f"create-course-exercise-form-title-{index}-input").locator("input")
+        description_input = self.page.get_by_test_id(f"create-course-exercise-form-description-{index}-input").locator(
+            'input'
+        )
 
         expect(subtitle).to_be_visible()
         expect(subtitle).to_have_text(f"#{index + 1} Exercise")
@@ -20,16 +21,14 @@ class CreateCourseExerciseFormComponent(BaseComponent):
         expect(title_input).to_have_value(text)
 
         expect(description_input).to_be_visible()
-        expect(description_input).to_be_value(description)
+        expect(description_input).to_have_value(description)
 
     def fill_create_exercise_form(self, index: int, text: str, description: str):
-        title_input = self.page.get_by_test_id(
-            f"create-course-exercise-form-description-{index}-input").locator(
-            "input")
+        title_input = self.page.get_by_test_id(f"create-course-exercise-form-title-{index}-input").locator("input")
 
-        description_input = self.page.get_by_test_id(
-            f"create-course-exercise-form-description-{index}-input").locator(
-            "input")
+        description_input = self.page.get_by_test_id(f"create-course-exercise-form-description-{index}-input").locator(
+            "input"
+        )
 
         title_input.fill(text)
         expect(description_input).to_have_value(text)
