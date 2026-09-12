@@ -17,4 +17,4 @@ class DashboardPage(BasePage):
         self.scores_chart_view = ChartViewComponent(page, "scores", "scatter")
         self.courses_chart_view = ChartViewComponent(page, "courses", "pie")
         self.students_chart_view = ChartViewComponent(page, "students", "bar")
-        self.activities_chart_view = ChartViewComponent(page, "activities", "activities-line")
+        self.activities_chart_view = ChartViewComponent(page, "activities", "line")

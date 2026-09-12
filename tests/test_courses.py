@@ -16,10 +16,11 @@ def test_create_course(courses_list_page: CoursesListPage, create_course_page: C
         min_score="0"
     )
     create_course_page.create_course_exercise_toolbar.check_visible()
+    create_course_page.check_visible_exercises_empty_view()
     create_course_page.create_course_exercise_toolbar.click_create_exercise_button()
     create_course_page.create_course_form_exercise.check_visible(
         index=0,
-        text="Exercise title",
+        title="Exercise title",
         description="Exercise description"
     )
     create_course_page.image_upload_input.upload_preview_image(file='./testdata/files/image.png')
