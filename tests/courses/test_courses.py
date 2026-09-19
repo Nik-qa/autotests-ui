@@ -68,3 +68,38 @@ class TestCourses:
         courses_list_page.course_view.check_visible(
             index=0, title="Playwright", max_score="100", min_score="10", estimated_time="2 weeks"
         )
+
+    def test_edit_course(self, courses_list_page: CoursesListPage, create_course_page: CreateCoursePage):
+        create_course_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create')
+        create_course_page.create_course_form.fill(
+            title='Playwright',
+            estimated_time='2 weeks',
+            description='Playwright',
+            max_score='100',
+            min_score='10'
+        )
+        create_course_page.image_upload_widget.upload_preview_image(file='./testdata/files/image.png')
+
+        create_course_page.create_course_toolbar.click_create_course_button()
+
+        courses_list_page.course_view.check_visible(
+            index=0, title="Playwright", max_score="100", min_score="10", estimated_time="2 weeks"
+        )
+
+        courses_list_page.course_view.menu.click_edit(index=0)
+
+        # create_course_page.create_course_form.clear_fields()
+
+        create_course_page.create_course_form.fill(
+            title="HelloWorld",
+            estimated_time='31 days',
+            description='HelloWorld',
+            max_score='13',
+            min_score='2'
+        )
+
+        create_course_page.create_course_toolbar.click_create_course_button()
+
+        courses_list_page.course_view.check_visible(
+            index=0, title="HelloWorld", max_score="13", min_score="2", estimated_time='31 days'
+        )

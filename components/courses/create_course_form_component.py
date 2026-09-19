@@ -23,6 +23,13 @@ class CreateCourseFormComponent(BaseComponent):
         self.max_score_input.fill(max_score)
         self.min_score_input.fill(min_score)
 
+    def clear_fields(self):
+        self.title_input.clear_field()
+        self.estimated_time_input.clear_field()
+        self.description_textarea.clear_field()
+        self.max_score_input.clear_field()
+        self.min_score_input.clear_field()
+
     def check_visible(self, title: str, estimated_time: str, description: str, max_score: str, min_score: str):
         self.title_input.check_visible()
         self.title_input.check_have_value(title)

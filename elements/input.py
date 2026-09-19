@@ -11,6 +11,10 @@ class Input(BaseElement):
         locator = self.get_locator(nth, **kwargs)
         locator.fill(value)
 
+    def clear_field(self, nth: int = 0, **kwargs):
+        locator = self.get_locator(nth, **kwargs)
+        locator.clear()
+
     def check_have_value(self, value: str, nth: int = 0, **kwargs):
         locator = self.get_locator(nth, **kwargs)
         expect(locator).to_have_value(value)
