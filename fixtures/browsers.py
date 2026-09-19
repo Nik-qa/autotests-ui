@@ -1,9 +1,12 @@
 import pytest
 from playwright.sync_api import Page, Playwright
 
+from pages.authentication.registration_page import RegistrationPage
+
+
 @pytest.fixture
 def chromium_page(playwright: Playwright) -> Page:
-    browser = playwright.chromium.launch(headless=True)
+    browser = playwright.chromium.launch(headless=False)
     yield browser.new_page()
     browser.close()
 
@@ -12,19 +15,20 @@ def initialize_browser_state(playwright: Playwright): #почитал про а�
     browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
     page = context.new_page()
-    page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
 
-    email_input = page.get_by_test_id('registration-form-email-input').locator('input')
-    email_input.fill('user.name@gmail.com')
-
-    username_input = page.get_by_test_id('registration-form-username-input').locator('input')
-    username_input.fill('username')
-
-    password_input = page.get_by_test_id('registration-form-password-input').locator('input')
-    password_input.fill('password')
-
-    button = page.get_by_test_id('registration-page-registration-button')
-    button.click()
+    registration_page = RegistrationPage(page=page)
+    registration_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
+    registration_page.registration_form.fill(email='user.name@gmail.com', username='username', password='password')
+    registration_page.registration_button.click()
+    # page.goto('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
+    # email_input = page.get_by_test_id('registration-form-email-input').locator('input')
+    # email_input.fill('user.name@gmail.com')
+    # username_input = page.get_by_test_id('registration-form-username-input').locator('input')
+    # username_input.fill('username')
+    # password_input = page.get_by_test_id('registration-form-password-input').locator('input')
+    # password_input.fill('password')
+    # button = page.get_by_test_id('registration-page-registration-button')
+    # button.click()
 
     page.wait_for_timeout(2000)
 
