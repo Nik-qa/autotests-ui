@@ -1,13 +1,18 @@
 from unittest import TestSuite
 
+import allure
 import pytest
+from tools.allure.testing_tag import Enum, AllureTraining
+
 
 @pytest.mark.smoke
-def test_smoke_case():
-    ...
-@pytest.mark.regression
-def test_regression_case():
-    ...
+@allure.epic(AllureTraining.TRAINING)
+class TestTraining:
+    def test_smoke_case(self):
+        ...
+    @pytest.mark.regression
+    def test_regression_case(self):
+        ...
 
 @pytest.mark.smoke
 class TestSuite:
@@ -17,6 +22,7 @@ class TestSuite:
         ...
 
 @pytest.mark.regression
+@allure.epic(AllureTraining.TRAINING)
 class TestUserAuthentication:
     @pytest.mark.smoke
     def test_login(self):
@@ -30,10 +36,12 @@ class TestUserAuthentication:
 @pytest.mark.smoke
 @pytest.mark.regression
 @pytest.mark.critical
+@allure.epic(AllureTraining.TRAINING)
 def test_critical_login():
     ...
 
 @pytest.mark.ui
+@allure.epic(AllureTraining.TRAINING)
 class TestUserInterface:
     @pytest.mark.smoke
     @pytest.mark.critical

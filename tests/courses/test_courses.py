@@ -18,6 +18,9 @@ from allure_commons.types import Severity
 @allure.epic(AllureEpic.LMS)
 @allure.feature(AllureFeature.COURSES)
 @allure.story(AllureStory.COURSES)
+@allure.parent_suite(AllureEpic.LMS)
+@allure.suite(AllureFeature.COURSES)
+@allure.sub_suite(AllureStory.COURSES)
 class TestCourses:
     def test_authentication(
             self, login_page: LoginPage, dashboard_page: DashboardPage, registration_page: RegistrationPage
