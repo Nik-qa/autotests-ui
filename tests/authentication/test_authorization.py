@@ -9,6 +9,10 @@ from tools.allure.features import AllureFeature # Импортируем enum Al
 from tools.allure.stories import AllureStory # Импортируем enum AllureStory
 from allure_commons.types import Severity
 
+from tools.routes import AppRoute
+from config import settings
+
+
 @pytest.mark.regression
 @pytest.mark.authorization
 @allure.tag(AllureTag.REGRESSION, AllureTag.AUTHORIZATION)
@@ -29,8 +33,8 @@ class TestAuthorization:
             dashboard_page: DashboardPage,
             registration_page: RegistrationPage
     ):
-        login_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login")
-        login_page.login_form.fill(email="user_user@gmail.com", password="password")
+        login_page.visit(AppRoute.LOGIN)
+        login_page.login_form.fill(settings.test_user.email, settings.test_user.password)
         login_page.click_login_button()
 
     @pytest.mark.parametrize(
@@ -46,7 +50,7 @@ class TestAuthorization:
     @allure.severity(Severity.CRITICAL)
     def test_wrong_email_or_password_authorization(self, login_page: LoginPage, email: str, password: str):
         # allure.dynamic.title(f"User login with wrong email or password: {email}")
-        login_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login")
+        login_page.visit(AppRoute.LOGIN)
         login_page.login_form.fill(email=email, password=password)
         login_page.click_login_button()
         login_page.check_visible_wrong_email_or_password_alert()
@@ -59,7 +63,7 @@ class TestAuthorization:
             login_page: LoginPage,
             registration_page: RegistrationPage
     ):
-        login_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login")
+        login_page.visit(AppRoute.LOGIN)
         login_page.click_registration_link()
 
         registration_page.registration_form.check_visible(email="", username="", password="")
