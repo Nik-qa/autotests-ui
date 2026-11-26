@@ -24,6 +24,7 @@ from config import settings
 @allure.sub_suite(AllureStory.AUTHORIZATION)
 
 class TestAuthorization:
+    @pytest.mark.xdist_group(name="authorization-group")
     @allure.tag(AllureTag.USER_LOGIN)
     @allure.title("User login with correct email or password")
     @allure.severity(Severity.BLOCKER)
@@ -37,6 +38,7 @@ class TestAuthorization:
         login_page.login_form.fill(settings.test_user.email, settings.test_user.password)
         login_page.click_login_button()
 
+    @pytest.mark.xdist_group(name="authorization-group")
     @pytest.mark.parametrize(
         'email, password',
         [
